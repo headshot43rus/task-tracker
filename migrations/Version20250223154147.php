@@ -27,10 +27,21 @@ final class Version20250223154147 extends AbstractMigration
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         ');
+
+        $this->addSql('
+            CREATE TRIGGER update_tasks_updated_at
+            BEFORE UPDATE ON tasks
+            FOR EACH ROW
+            BEGIN
+                SET NEW.updated_at = NOW();
+            END
+        ');
     }
 
     public function down(Schema $schema): void
     {
+        $this->addSql('DROP TRIGGER IF EXISTS update_tasks_updated_at');
+
         $this->addSql('DROP TABLE tasks');
     }
 }

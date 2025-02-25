@@ -17,7 +17,10 @@ docker exec -it task-tracker_php bash
 composer install
 ```
 
-5. Провести миграции в базу данных
+5. Выполнить миграции в базу данных
+```
+php bin/console doctrine:migrations:migrate
+```
 
 Если всё прошло удачно, проект должен быть доступен по адресу http://localhost/
 

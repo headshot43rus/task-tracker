@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/api/tasks', name: 'api_tasks_')]
 final class TaskController extends AbstractController
@@ -73,7 +72,7 @@ final class TaskController extends AbstractController
         return $this->json($data, Response::HTTP_CREATED);
     }
 
-    #[Route('/{id}', name: 'edit', methods: ['PUT'])]
+    #[Route('/{id}', name: 'update', methods: ['PUT'])]
     public function update(int $id, Request $request): JsonResponse
     {
         $task = $this->taskRepository->find($id);

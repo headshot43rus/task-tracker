@@ -6,7 +6,6 @@ use App\Enum\Status;
 use App\Repository\TaskRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ORM\Table(name: 'tasks')]
@@ -16,27 +15,21 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['tasks'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['tasks'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['tasks'])]
     private ?string $description = null;
 
     #[ORM\Column(enumType: Status::class)]
-    #[Groups(['tasks'])]
     private ?Status $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['tasks'])]
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Groups(['tasks'])]
     private ?\DateTimeInterface $updated_at = null;
 
     public function getId(): ?int

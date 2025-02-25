@@ -146,11 +146,12 @@ class TaskControllerTest extends WebTestCase
         $this->entityManager->persist($task);
         $this->entityManager->flush();
 
-        $this->client->request('DELETE', '/api/tasks/' . $task->getId());
+        $taskId = $task->getId();
+        $this->client->request('DELETE', '/api/tasks/' . $taskId);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_NO_CONTENT);
 
-        $deletedTask = $this->taskRepository->find($task->getId());
+        $deletedTask = $this->taskRepository->find($taskId);
         $this->assertNull($deletedTask);
     }
 }
